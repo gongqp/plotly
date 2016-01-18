@@ -1,0 +1,11 @@
+library(MASS)
+bivn <- mvrnorm(1000, mu = c(0, 0), Sigma = matrix(c(1, .5, .5, 1), 2))
+
+# now we do a kernel density estimate
+bivn.kde <- kde2d(bivn[,1], bivn[,2], n = 50)
+x<-unlist(bivn.kde[1])
+y<-unlist(bivn.kde[2])
+z<-unlist(bivn.kde[3])
+
+library(plotly)
+plot_ly(bivn.kde,x=x,y=y,z=z,type="contour")
